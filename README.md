@@ -85,26 +85,7 @@ flowchart TD
 
 ---
 
-## 7. 🎯 Interview Questions & Answers
-
-**Q: Explain your project in brief.**
-**A:** "I built a Grocery Management System using Spring Boot and Thymeleaf. It is an end-to-end admin portal handling product inventory, categories, customers, and a billing checkout system. It automatically calculates complex pricing, manages secure admin sessions, ensures transactional safety when generating bills and reducing stock, and produces printable invoices."
-
-**Q: How did you implement the pricing logic?**
-**A:** "I mapped the MRP, Selling Price, and Discount to the Product entity. To ensure the final price is always accurate and to avoid computing it blindly in the view, I used JPA `@PrePersist` and `@PreUpdate` callbacks to calculate the `finalPrice` automatically before saving it to the database."
-
-**Q: How is the inventory updated?**
-**A:** "During the checkout process, the `BillingService` loops through the purchased items and calls the `ProductService` to reduce stock. The entire checkout method is annotated with `@Transactional`, so if a customer tries to buy more items than are in stock, an exception is thrown and the whole transaction (including partial bill creation) gets rolled back to maintain consistency."
-
-**Q: Why did you choose this tech stack?**
-**A:** "Java and Spring Boot are industry standards for robust, typed backend applications. I chose Thymeleaf because it offers tight integration with Spring Security and MVC controllers for server-side rendering, and Spring Data JPA to quickly abstract away SQL statements while maintaining strong relational constraints."
-
-**Q: How do you handle exceptions in the application?**
-**A:** "For predictable errors like insufficient stock or constraint violations (e.g., deleting a referenced entity), the controllers wrap the service calls in a `try-catch` block. They catch the specific exceptions (like standard RuntimeExceptions) and load error messages into Spring's `RedirectAttributes`. This allows the application to redirect safely and display a clean error alert on the UI."
-
----
-
-## 8. ▶️ How to Run Project
+## 7. ▶️ How to Run Project
 
 ### Backend & Database Setup
 1. **Prerequisites**: Ensure you have Java 17+ installed. No external database software like MySQL is required natively because the app is configured to use an embedded H2 database for instant, zero-setup execution.
@@ -125,7 +106,7 @@ flowchart TD
 
 ---
 
-## 9. 🔥 Key Highlights (Quick Revision Section)
+## 8. 🔥 Key Highlights (Quick Revision Section)
 
 * **Architecture**: Spring Boot MVC + Thymeleaf server-side rendering.
 * **Database**: Hibernate/JPA ORM with embedded H2 (or MySQL) utilizing `@ManyToOne` relationships.
