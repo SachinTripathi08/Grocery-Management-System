@@ -74,18 +74,7 @@ flowchart TD
 
 ---
 
-## 6. 🧠 Important Concepts for Interview
-
-* **MVC Architecture**: The project strictly follows Model (Entities + DB), View (Thymeleaf HTML templates), and Controller (Spring `@Controller`).
-* **JPA/Hibernate**: The concept of ORM, `@Entity`, `@OneToMany`/`@ManyToOne` relationships, and Cascade rules.
-* **Dependency Injection (DI)**: How Spring's IoC container builds and injects beans (e.g., using Lombok's `@RequiredArgsConstructor` for constructor injection).
-* **Spring Security**: Implementing custom `UserDetailsService`, `SecurityFilterChain`, and password hashing using `BCryptPasswordEncoder`.
-* **Database Normalization**: Separating entities cleanly (e.g., `Bill` header vs `BillItem` details) to prevent data redundancy.
-* **Transactional Integrity**: The ACID properties provided by `@Transactional` during complex operations like billing.
-
----
-
-## 7. ▶️ How to Run Project
+## 6. ▶️ How to Run Project
 
 ### Backend & Database Setup
 1. **Prerequisites**: Ensure you have Java 17+ installed. No external database software like MySQL is required natively because the app is configured to use an embedded H2 database for instant, zero-setup execution.
@@ -105,22 +94,6 @@ flowchart TD
    * *Optional*: You can view the raw database tables by navigating to `http://localhost:8080/h2-console` (JDBC URL: `jdbc:h2:mem:grocery_db`, Username: `sa`, Password: *[Empty]*).
 
 ---
-
-## 8. 🔥 Key Highlights (Quick Revision Section)
-
-* **Architecture**: Spring Boot MVC + Thymeleaf server-side rendering.
-* **Database**: Hibernate/JPA ORM with embedded H2 (or MySQL) utilizing `@ManyToOne` relationships.
-* **Security**: Session-based Spring Security with BCrypt hashed passwords.
-* **Transaction Management**: Used `@Transactional` during billing to ensure atomicity (Bill + Bill Items + Stock Deduction).
-* **JPA Lifecycles**: `@PrePersist`/`@PreUpdate` heavily used for auto-calculations.
-* **Database Constraints**: Controlled deletion behavior using DB-level `@OnDelete(action = OnDeleteAction.CASCADE)`.
-* **Error Handling**: Graceful Controller-level `RedirectAttributes` handling preventing 500 Internal Server crashes.
-* **Clean DI**: Used Constructor Injection via Lombok's `@RequiredArgsConstructor`.
-
-
-
-
-
 
 ## 📜 License
 
