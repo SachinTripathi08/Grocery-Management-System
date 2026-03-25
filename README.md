@@ -135,3 +135,14 @@ flowchart TD
 * **Database Constraints**: Controlled deletion behavior using DB-level `@OnDelete(action = OnDeleteAction.CASCADE)`.
 * **Error Handling**: Graceful Controller-level `RedirectAttributes` handling preventing 500 Internal Server crashes.
 * **Clean DI**: Used Constructor Injection via Lombok's `@RequiredArgsConstructor`.
+
+
+
+
+
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+© 2026 Sachin Tripathi & Riddhisha Srivastava
