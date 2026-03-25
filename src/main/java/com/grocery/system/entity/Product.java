@@ -1,0 +1,56 @@
+package com.grocery.system.entity;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "products")
+@Data
+@NoArgsConstructor
+public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String name;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Category category;
+
+    @Column(nullable = false)
+    private Double costPrice;
+
+    @Column(nullable = false)
+    private Double mrp;
+
+    @Column(nullable = false)
+    private Double sellingPrice;
+
+    @Column(nullable = false)
+    private Double discount; // Percentage
+
+    @Column(nullable = false)
+    private Double finalPrice; // Auto-calculated
+
+    @Column(nullable = false)
+    private Integer quantity;
+
+    private LocalDate expiryDate;
+
+    @PrePersist
+    @PreUpdate
+    public void calculateFinalPrice() {
+        if (sellingPrice != null && discount != null) {
+            this.finalPrice = this.sellingPrice - (this.sellingPrice * this.discount / 100.0);
+        } else if (sellingPrice != null) {
+            this.finalPrice = this.sellingPrice;
+        }
+    }
+}
