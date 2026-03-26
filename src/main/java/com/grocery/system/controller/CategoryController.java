@@ -25,6 +25,16 @@ public class CategoryController {
         return "categories/form";
     }
 
+    @GetMapping("/edit/{id}")
+    public String editForm(@PathVariable("id") Long id, Model model) {
+        Category category = categoryService.findById(id);
+        if (category != null) {
+            model.addAttribute("category", category);
+            return "categories/form";
+        }
+        return "redirect:/categories";
+    }
+
     @PostMapping("/save")
     public String save(@ModelAttribute Category category) {
         categoryService.save(category);
@@ -32,7 +42,7 @@ public class CategoryController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Long id, org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttributes) {
+    public String delete(@PathVariable("id") Long id, org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttributes) {
         try {
             categoryService.deleteById(id);
             redirectAttributes.addFlashAttribute("successMessage", "Category deleted successfully.");

@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDate;
 
 @Entity
@@ -19,7 +20,7 @@ public class Product {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Category category;
@@ -42,6 +43,7 @@ public class Product {
     @Column(nullable = false)
     private Integer quantity;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate expiryDate;
 
     @PrePersist

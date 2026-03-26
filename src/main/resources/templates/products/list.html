@@ -40,6 +40,7 @@
                             <td class="table-success fw-bold" th:text="${#numbers.formatDecimal(p.finalPrice, 1, 2)}"></td>
                             <td th:classappend="${p.quantity < 5} ? 'table-danger fw-bold' : ''" th:text="${p.quantity}"></td>
                             <td>
+                                <a th:href="@{'/products/edit/' + ${p.id}}" class="btn btn-sm btn-warning">Edit</a>
                                 <a th:href="@{'/products/delete/' + ${p.id}}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
                             </td>
                         </tr>

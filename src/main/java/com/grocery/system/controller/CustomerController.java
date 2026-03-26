@@ -25,6 +25,16 @@ public class CustomerController {
         return "customers/form";
     }
 
+    @GetMapping("/edit/{id}")
+    public String editForm(@PathVariable("id") Long id, Model model) {
+        Customer customer = customerService.findById(id);
+        if (customer != null) {
+            model.addAttribute("customer", customer);
+            return "customers/form";
+        }
+        return "redirect:/customers";
+    }
+
     @PostMapping("/save")
     public String save(@ModelAttribute Customer customer) {
         customerService.save(customer);
@@ -32,7 +42,7 @@ public class CustomerController {
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Long id, org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttributes) {
+    public String delete(@PathVariable("id") Long id, org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttributes) {
         try {
             customerService.deleteById(id);
             redirectAttributes.addFlashAttribute("successMessage", "Customer deleted successfully.");

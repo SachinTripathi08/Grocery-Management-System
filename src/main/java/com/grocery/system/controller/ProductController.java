@@ -28,6 +28,17 @@ public class ProductController {
         return "products/form";
     }
 
+    @GetMapping("/edit/{id}")
+    public String editForm(@PathVariable("id") Long id, Model model) {
+        Product product = productService.findById(id);
+        if (product != null) {
+            model.addAttribute("product", product);
+            model.addAttribute("categories", categoryService.findAll());
+            return "products/form";
+        }
+        return "redirect:/products";
+    }
+
     @PostMapping("/save")
     public String save(@ModelAttribute Product product) {
         productService.save(product);
@@ -35,7 +46,7 @@ public class ProductController {
     }
     
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable Long id, org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttributes) {
+    public String delete(@PathVariable("id") Long id, org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttributes) {
         try {
             productService.deleteById(id);
             redirectAttributes.addFlashAttribute("successMessage", "Product deleted successfully.");

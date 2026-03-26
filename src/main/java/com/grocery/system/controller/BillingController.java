@@ -44,7 +44,7 @@ public class BillingController {
 
     // A simple DTO for form submission
     @PostMapping("/save")
-    public String save(@RequestParam(required = false) Long customerId,
+    public String save(@RequestParam(value = "customerId", required = false) Long customerId,
                        @RequestParam("productIds") List<Long> productIds,
                        @RequestParam("quantities") List<Integer> quantities,
                        org.springframework.web.servlet.mvc.support.RedirectAttributes redirectAttributes) {
@@ -79,13 +79,13 @@ public class BillingController {
     }
 
     @GetMapping("/view/{id}")
-    public String view(@PathVariable Long id, Model model) {
+    public String view(@PathVariable("id") Long id, Model model) {
         model.addAttribute("bill", billingService.findById(id));
         return "bills/view";
     }
 
     @GetMapping("/pdf/{id}")
-    public ResponseEntity<ByteArrayResource> generatePdf(@PathVariable Long id) {
+    public ResponseEntity<ByteArrayResource> generatePdf(@PathVariable("id") Long id) {
         Bill bill = billingService.findById(id);
         byte[] pdfBytes = pdfService.generatePdfReceipt(bill);
 
